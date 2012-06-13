@@ -11,18 +11,28 @@ LINE_ENDINGS = {
 
 class EditorConfig(sublime_plugin.EventListener):
 	def on_load(self, view):
+		path = view.file_name()
+		if not path:
+			return
 		try:
-			config = get_properties(view.file_name())
+			config = get_properties(path)
 		except EditorConfigError:
 			print 'Error occurred while getting EditorConfig properties'
 		else:
 			if config:
 				settings = view.settings()
-				# EOL
-				view.set_line_endings(LINE_ENDINGS[config['end_of_line']])
+				window = view.window()
+				end_of_line = config.get('end_of_line')
+				indent_style = config.get('indent_style')
+				indent_size = config.get('indent_size')
 				# Indent type
-				settings.set('translate_tabs_to_spaces', config['indent_style'] == 'space')
+				if indent_style == 'tab':
+					window.run_command('unexpand_tabs', {'set_translate_tabs': False})
+				if indent_style == 'space':
+					window.run_command('expand_tabs', {'set_translate_tabs': True})
 				# Indent size
-				settings.set('tab_size', int(config['indent_size']))
-			else:
-				print 'There seems to be an error with your .editorconfig file'
+				if indent_size:
+					settings.set('tab_size', int(indent_size))
+				# EOL
+				if end_of_line:
+					view.set_line_endings(LINE_ENDINGS[end_of_line])
