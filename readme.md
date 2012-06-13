@@ -10,10 +10,15 @@ Install with [Package Control](http://wbond.net/sublime_packages/package_control
 
 ## Supported properties
 
+- root
 - indent_style
 - indent_size
 - end\_of\_line
-- root *(only used by EditorConfig core)*
+
+
+## Trailing whitespace
+
+Not an EditorConfig property, but I would recommend you also set `trim_trailing_white_space_on_save` to `true` in your `Preferences.sublime-settings`. This ensures you will never bother anyone with trailing whitespace again.
 
 
 ## License
