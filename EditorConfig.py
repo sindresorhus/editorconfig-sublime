@@ -40,7 +40,10 @@ class EditorConfig(sublime_plugin.EventListener):
 			#window.run_command('expand_tabs', {'set_translate_tabs': True})
 		# Indent size
 		if indent_size:
-			settings.set('tab_size', int(indent_size))
+			try:
+				settings.set('tab_size', int(indent_size))
+			except ValueError:
+				pass
 		# EOL
 		if end_of_line in LINE_ENDINGS:
 			view.set_line_endings(LINE_ENDINGS[end_of_line])
