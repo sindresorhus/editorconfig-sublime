@@ -40,5 +40,5 @@ class EditorConfig(sublime_plugin.EventListener):
 		if indent_size:
 			settings.set('tab_size', int(indent_size))
 		# EOL
-		if end_of_line:
+		if end_of_line in LINE_ENDINGS:
 			view.set_line_endings(LINE_ENDINGS[end_of_line])
