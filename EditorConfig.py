@@ -8,6 +8,13 @@ LINE_ENDINGS = {
 	'cr': 'cr'
 }
 
+CHARSETS = {
+	'latin1': 'Western (ISO 8859-1)',
+	'utf-8': 'utf-8',
+	'utf-8-bom': 'utf-8 with bom',
+	'utf-16be': 'utf-16 be',
+	'utf-16le': 'utf-16 le'
+}
 
 class EditorConfig(sublime_plugin.EventListener):
 	def on_load(self, view):
@@ -27,6 +34,7 @@ class EditorConfig(sublime_plugin.EventListener):
 		indent_style = config.get('indent_style')
 		indent_size = config.get('indent_size')
 		end_of_line = config.get('end_of_line')
+		charset = config.get('charset')
 		trim_trailing_whitespace = config.get('trim_trailing_whitespace')
 		insert_final_newline = config.get('insert_final_newline')
 		if indent_style == 'space':
@@ -40,6 +48,8 @@ class EditorConfig(sublime_plugin.EventListener):
 				pass
 		if end_of_line in LINE_ENDINGS:
 			view.set_line_endings(LINE_ENDINGS[end_of_line])
+		if charset in CHARSETS and view.encoding() not in ['Undefined', CHARSETS[charset]]:
+			view.run_command('save', {'encoding': CHARSETS[charset]})
 		if trim_trailing_whitespace == 'true':
 			settings.set('trim_trailing_white_space_on_save', True)
 		if insert_final_newline == 'true':
