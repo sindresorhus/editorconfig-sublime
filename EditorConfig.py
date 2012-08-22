@@ -28,6 +28,7 @@ class EditorConfig(sublime_plugin.EventListener):
 		end_of_line = config.get('end_of_line')
 		indent_style = config.get('indent_style')
 		indent_size = config.get('indent_size')
+		trim_trailing_whitespace = config.get('trim_trailing_whitespace')
 		# Indent type
 		if indent_style == 'space':
 			settings.set('translate_tabs_to_spaces', True)
@@ -47,3 +48,5 @@ class EditorConfig(sublime_plugin.EventListener):
 		# EOL
 		if end_of_line in LINE_ENDINGS:
 			view.set_line_endings(LINE_ENDINGS[end_of_line])
+		if trim_trailing_whitespace == 'true':
+			settings.set('trim_trailing_white_space_on_save', True)
