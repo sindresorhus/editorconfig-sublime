@@ -18,6 +18,12 @@ CHARSETS = {
 
 class EditorConfig(sublime_plugin.EventListener):
 	def on_load(self, view):
+		self.init(view, False)
+
+	def on_pre_save(self, view):
+		self.init(view, True)
+
+	def init(self, view, pre_save):
 		path = view.file_name()
 		if not path:
 			return
@@ -27,14 +33,21 @@ class EditorConfig(sublime_plugin.EventListener):
 			print 'Error occurred while getting EditorConfig properties'
 		else:
 			if config:
-				self.apply_config(view, config)
+				if pre_save:
+					self.apply_charset(view, config)
+				else:
+					self.apply_config(view, config)
+
+	def apply_charset(self, view, config):
+		charset = config.get('charset')
+		if charset in CHARSETS:
+			view.set_encoding(CHARSETS[charset])
 
 	def apply_config(self, view, config):
 		settings = view.settings()
 		indent_style = config.get('indent_style')
 		indent_size = config.get('indent_size')
 		end_of_line = config.get('end_of_line')
-		charset = config.get('charset')
 		trim_trailing_whitespace = config.get('trim_trailing_whitespace')
 		insert_final_newline = config.get('insert_final_newline')
 		if indent_style == 'space':
@@ -48,8 +61,6 @@ class EditorConfig(sublime_plugin.EventListener):
 				pass
 		if end_of_line in LINE_ENDINGS:
 			view.set_line_endings(LINE_ENDINGS[end_of_line])
-		if charset in CHARSETS and view.encoding() not in ['Undefined', CHARSETS[charset]]:
-			view.run_command('save', {'encoding': CHARSETS[charset]})
 		if trim_trailing_whitespace == 'true':
 			settings.set('trim_trailing_white_space_on_save', True)
 		elif trim_trailing_whitespace == 'false':
