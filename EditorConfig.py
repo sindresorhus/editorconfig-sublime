@@ -52,5 +52,9 @@ class EditorConfig(sublime_plugin.EventListener):
 			view.run_command('save', {'encoding': CHARSETS[charset]})
 		if trim_trailing_whitespace == 'true':
 			settings.set('trim_trailing_white_space_on_save', True)
+		elif trim_trailing_whitespace == 'false':
+			settings.set('trim_trailing_white_space_on_save', False)
 		if insert_final_newline == 'true':
 			settings.set('ensure_newline_at_eof_on_save', True)
+		elif insert_final_newline == 'false':
+			settings.set('ensure_newline_at_eof_on_save', False)
