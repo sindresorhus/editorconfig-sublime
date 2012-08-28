@@ -8,20 +8,53 @@
 Install with [Package Control](http://wbond.net/sublime_packages/package_control)
 
 
+## Getting started
+
+See the [EditorConfig site][] for documentation.
+
+
 ## Supported properties
 
 - root
 - indent_style
 - indent_size
 - end\_of\_line
+- charset\*
+- trim_trailing_whitespace\*
+- insert_final_newline\*
+
+*\*New property*
+
+Explanation of the properties can be found on the [EditorConfig site][].
+
+
+## Example file
+
+*My recommended default settings*
+
+```ini
+# editorconfig.org
+root = true
+
+[*]
+indent_style = tab
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+```
 
 
 ## Trailing whitespace
 
-Not an EditorConfig property, but I would recommend you also set `trim_trailing_white_space_on_save` to `true` in your `Preferences.sublime-settings`. This ensures you will never bother anyone with trailing whitespace again.
+Even though there is a `trim_trailing_whitespace` property. I would still recommend you set `"draw_white_space": "all"` in your Sublime preferences to prevent you from accidentally committing whitespace garbage whenever a project is missing a .editorconfig file.
 
 
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 (c) [Sindre Sorhus](http://sindresorhus.com)
+
+
+
+[EditorConfig site]: http://editorconfig.org
