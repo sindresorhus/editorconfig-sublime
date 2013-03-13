@@ -1,6 +1,6 @@
-import sublime_plugin
+import sublime_plugin, sys, os
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 from editorconfig import get_properties, EditorConfigError
-
 
 LINE_ENDINGS = {
 	'lf': 'unix',
@@ -17,7 +17,7 @@ CHARSETS = {
 }
 
 class EditorConfig(sublime_plugin.EventListener):
-	def on_load(self, view):
+	def on_load_async(self, view):
 		self.init(view, False)
 
 	def on_pre_save(self, view):
@@ -30,7 +30,8 @@ class EditorConfig(sublime_plugin.EventListener):
 		try:
 			config = get_properties(path)
 		except EditorConfigError:
-			print 'Error occurred while getting EditorConfig properties'
+			print('Error occurred while getting EditorConfig properties')
+			return
 		else:
 			if config:
 				if pre_save:
