@@ -31,7 +31,6 @@ class EditorConfig(sublime_plugin.EventListener):
 			config = get_properties(path)
 		except EditorConfigError:
 			print('Error occurred while getting EditorConfig properties')
-			return
 		else:
 			if config:
 				if pre_save:
