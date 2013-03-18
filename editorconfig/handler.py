@@ -110,7 +110,7 @@ class EditorConfigHandler(object):
         # Set indent_size to "tab" if indent_size is unspecified and
         # indent_style is set to "tab".
         if (opts.get("indent_style") == "tab" and
-            not "indent_size" in opts and self.version >= VERSION[:3]):
+            not "indent_size" in opts and self.version is not None and self.version >= VERSION[:3]):
             opts["indent_size"] = "tab"
 
         # Set tab_width to indent_size if indent_size is specified and
