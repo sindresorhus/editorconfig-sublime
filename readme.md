@@ -5,16 +5,7 @@
 
 ## Install
 
-
-### Sublime Text 2
-
-Install with [Package Control](http://wbond.net/sublime_packages/package_control)
-
-
-### Sublime Text 3
-
-[Download](https://github.com/sindresorhus/editorconfig-sublime/archive/st3.zip), unzip, and put the contents in `~/Library/Application Support/Sublime Text 3/Packages/EditorConfig`.  
-Will be easier when Package Control is fully compatible.
+Install `EditorConfig` with [Package Control](https://sublime.wbond.net) and restart Sublime.
 
 
 ## Getting started
@@ -66,8 +57,7 @@ This plugin does its changes transparently in the background. I would recommend 
 
 ## License
 
-[MIT License](http://en.wikipedia.org/wiki/MIT_License)
-(c) [Sindre Sorhus](http://sindresorhus.com)
+MIT License • © [Sindre Sorhus](http://sindresorhus.com)
 
 
 
