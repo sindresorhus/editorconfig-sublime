@@ -1,5 +1,13 @@
 import sublime_plugin
-from editorconfig import get_properties, EditorConfigError
+
+try:
+	import os, sys
+	# stupid python module system
+	sys.path.append(os.path.dirname(os.path.realpath(__file__)))
+	from .editorconfig import get_properties, EditorConfigError
+except:
+	# Python 2
+	from editorconfig import get_properties, EditorConfigError
 
 
 LINE_ENDINGS = {
@@ -30,7 +38,7 @@ class EditorConfig(sublime_plugin.EventListener):
 		try:
 			config = get_properties(path)
 		except EditorConfigError:
-			print 'Error occurred while getting EditorConfig properties'
+			print('Error occurred while getting EditorConfig properties')
 		else:
 			if config:
 				if pre_save:
