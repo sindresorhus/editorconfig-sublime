@@ -25,19 +25,24 @@ CHARSETS = {
 }
 
 class EditorConfig(sublime_plugin.EventListener):
+	MARKER = 'editorconfig'
+
 	def on_activated(self, view):
-		if view.settings().has('editorconfig'):
-			return
-		self.init(view, False)
-		view.settings().set('editorconfig', True)
+		if not view.settings().has(self.MARKER):
+			self.init(view, False)
 
 	def on_pre_save(self, view):
 		self.init(view, True)
+
+	def on_post_save(self, view):
+		if not view.settings().has(self.MARKER):
+			self.init(view, False)
 
 	def init(self, view, pre_save):
 		path = view.file_name()
 		if not path:
 			return
+
 		try:
 			config = get_properties(path)
 		except EditorConfigError:
@@ -80,3 +85,5 @@ class EditorConfig(sublime_plugin.EventListener):
 			settings.set('ensure_newline_at_eof_on_save', True)
 		elif insert_final_newline == 'false':
 			settings.set('ensure_newline_at_eof_on_save', False)
+
+		view.settings().set(self.MARKER, True)
