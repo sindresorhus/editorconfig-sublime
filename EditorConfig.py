@@ -25,8 +25,11 @@ CHARSETS = {
 }
 
 class EditorConfig(sublime_plugin.EventListener):
-	def on_load(self, view):
+	def on_activated(self, view):
+		if view.settings().has('editorconfig'):
+			return
 		self.init(view, False)
+		view.settings().set('editorconfig', True)
 
 	def on_pre_save(self, view):
 		self.init(view, True)
