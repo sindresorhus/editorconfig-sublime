@@ -47,7 +47,7 @@ insert_final_newline = true
 
 ### Trailing whitespace
 
-Even though there is a `trim_trailing_whitespace` property. I would still recommend you set `"draw_white_space": "all"` in your Sublime preferences to prevent you from accidentally committing whitespace garbage whenever a project is missing a .editorconfig file.
+Even though there is a `trim_trailing_whitespace` property. I would still recommend you set `"draw_white_space": "all"` and/or `"trim_trailing_white_space_on_save": true` in your Sublime preferences to prevent you from accidentally committing whitespace garbage whenever a project is missing a .editorconfig file.
 
 
 ### Show changes
