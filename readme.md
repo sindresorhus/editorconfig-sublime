@@ -1,6 +1,6 @@
-# EditorConfig - Sublime Text plugin
+# EditorConfig
 
-> [EditorConfig](http://editorconfig.org) helps developers define and maintain consistent coding styles between different editors and IDEs. The EditorConfig project consists of a file format for defining coding styles and a collection of text editor plugins that enable editors to read the file format and adhere to defined styles. EditorConfig files are easily readable and they work nicely with version control systems.
+> [EditorConfig](http://editorconfig.org) helps developers maintain consistent coding styles between different editors
 
 
 ## Install
@@ -57,7 +57,7 @@ This plugin does its changes transparently in the background. I would recommend 
 
 ## License
 
-MIT License • © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)
 
 
 
