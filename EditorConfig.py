@@ -9,7 +9,6 @@ except:
 	# Python 2
 	from editorconfig import get_properties, EditorConfigError
 
-
 LINE_ENDINGS = {
 	'lf': 'unix',
 	'crlf': 'windows',
@@ -57,10 +56,15 @@ class EditorConfig(sublime_plugin.EventListener):
 	def apply_pre_save(self, view, config):
 		charset = config.get('charset')
 		end_of_line = config.get('end_of_line')
+		indent_style = config.get('indent_style')
 		if charset in CHARSETS:
 			view.set_encoding(CHARSETS[charset])
 		if end_of_line in LINE_ENDINGS:
 			view.set_line_endings(LINE_ENDINGS[end_of_line])
+		if indent_style == 'space':
+			view.run_command('expand_tabs', {'set_translate_tabs': True})
+		elif indent_style == 'tab':
+			view.run_command('unexpand_tabs', {'set_translate_tabs': True})
 
 	def apply_config(self, view, config):
 		settings = view.settings()
