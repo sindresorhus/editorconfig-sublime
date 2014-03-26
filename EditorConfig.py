@@ -54,6 +54,8 @@ class EditorConfig(sublime_plugin.EventListener):
 					self.apply_config(view, config)
 
 	def apply_pre_save(self, view, config):
+		settings = view.settings()
+		spaces = settings.get('translate_tabs_to_spaces')
 		charset = config.get('charset')
 		end_of_line = config.get('end_of_line')
 		indent_style = config.get('indent_style')
@@ -61,9 +63,9 @@ class EditorConfig(sublime_plugin.EventListener):
 			view.set_encoding(CHARSETS[charset])
 		if end_of_line in LINE_ENDINGS:
 			view.set_line_endings(LINE_ENDINGS[end_of_line])
-		if indent_style == 'space':
+		if indent_style == 'space' and spaces == False:
 			view.run_command('expand_tabs', {'set_translate_tabs': True})
-		elif indent_style == 'tab':
+		elif indent_style == 'tab' and spaces == True:
 			view.run_command('unexpand_tabs', {'set_translate_tabs': True})
 
 	def apply_config(self, view, config):
