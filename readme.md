@@ -57,7 +57,7 @@ This plugin does its changes transparently in the background. I would recommend 
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
 
 
 
