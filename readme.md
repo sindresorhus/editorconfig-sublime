@@ -40,15 +40,21 @@ end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
+
+[*.md]
+trim_trailing_whitespace = false
 ```
 
 
 ## Tips
 
+### View active config
+
+The active config is printed in the Sublime console.
+
 ### Trailing whitespace
 
 Even though there is a `trim_trailing_whitespace` property. I would still recommend you set `"draw_white_space": "all"` and/or `"trim_trailing_white_space_on_save": true` in your Sublime preferences to prevent you from accidentally committing whitespace garbage whenever a project is missing a .editorconfig file.
-
 
 ### Show changes
 
@@ -57,8 +63,7 @@ This plugin does its changes transparently in the background. I would recommend 
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
-
+MIT © [Sindre Sorhus](http://sindresorhus.com)
 
 
 [EditorConfig site]: http://editorconfig.org

@@ -1,4 +1,10 @@
+import pprint
 import sublime_plugin
+
+def unexpanduser(path):
+	import re
+	from os.path import expanduser
+	return re.sub(r'^%s' % expanduser('~'), '~', path)
 
 try:
 	import os, sys
@@ -28,16 +34,16 @@ class EditorConfig(sublime_plugin.EventListener):
 
 	def on_activated(self, view):
 		if not view.settings().has(self.MARKER):
-			self.init(view, False)
+			self.init(view, 'activated')
 
 	def on_pre_save(self, view):
-		self.init(view, True)
+		self.init(view, 'pre_save')
 
 	def on_post_save(self, view):
 		if not view.settings().has(self.MARKER):
-			self.init(view, False)
+			self.init(view, 'post_save')
 
-	def init(self, view, pre_save):
+	def init(self, view, event):
 		path = view.file_name()
 		if not path:
 			return
@@ -48,7 +54,13 @@ class EditorConfig(sublime_plugin.EventListener):
 			print('Error occurred while getting EditorConfig properties')
 		else:
 			if config:
-				if pre_save:
+				if event == 'activated':
+					print('\nEditorConfig')
+					path = unexpanduser(path)
+					print(path)
+					pprint.pprint(config)
+					print('')
+				if event == 'pre_save':
 					self.apply_pre_save(view, config)
 				else:
 					self.apply_config(view, config)
