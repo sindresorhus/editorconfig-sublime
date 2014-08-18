@@ -4,7 +4,7 @@ import sublime_plugin
 def unexpanduser(path):
 	import re
 	from os.path import expanduser
-	return re.sub(r'^%s' % expanduser('~'), '~', path)
+	return path.replace(expanduser('~'), '~')
 
 try:
 	import os, sys
