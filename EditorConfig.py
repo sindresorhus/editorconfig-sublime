@@ -2,7 +2,6 @@ import pprint
 import sublime_plugin
 
 def unexpanduser(path):
-	import re
 	from os.path import expanduser
 	return path.replace(expanduser('~'), '~')
 
