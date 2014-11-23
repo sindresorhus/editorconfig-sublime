@@ -8,6 +8,7 @@ import getopt
 import sys
 
 from editorconfig import __version__, VERSION
+from editorconfig.compat import force_unicode
 from editorconfig.versiontools import split_version
 from editorconfig.handler import EditorConfigHandler
 from editorconfig.exceptions import ParsingError, PathError, VersionError
@@ -24,9 +25,9 @@ def usage(command, error=False):
         out = sys.stdout
     out.write("%s [OPTIONS] FILENAME\n" % command)
     out.write('-f                 '
-            'Specify conf filename other than ".editorconfig".\n')
+              'Specify conf filename other than ".editorconfig".\n')
     out.write("-b                 "
-            "Specify version (used by devs to test compatibility).\n")
+              "Specify version (used by devs to test compatibility).\n")
     out.write("-h OR --help       Print this help message.\n")
     out.write("-v OR --version    Display version information.\n")
 
@@ -34,9 +35,10 @@ def usage(command, error=False):
 def main():
     command_name = sys.argv[0]
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "vhb:f:", ["version", "help"])
-    except getopt.GetoptError:
-        print(str(sys.exc_info()[1]))  # For Python 2/3 compatibility
+        opts, args = getopt.getopt(list(map(force_unicode, sys.argv[1:])),
+                                   "vhb:f:", ["version", "help"])
+    except getopt.GetoptError as e:
+        print(str(e))
         usage(command_name, error=True)
         sys.exit(2)
 
@@ -68,7 +70,7 @@ def main():
         try:
             options = handler.get_configurations()
         except (ParsingError, PathError, VersionError):
-            print(str(sys.exc_info()[1]))  # For Python 2/3 compatibility
+            print(str(e))
             sys.exit(2)
         if multiple_files:
             print("[%s]" % filename)

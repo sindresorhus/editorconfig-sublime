@@ -17,7 +17,7 @@ import re
 from codecs import open
 import posixpath
 from os import sep
-from os.path import normcase, dirname
+from os.path import normpath, dirname
 
 from editorconfig.exceptions import ParsingError
 from editorconfig.fnmatch import fnmatch
@@ -38,19 +38,43 @@ class EditorConfigParser(object):
     # Regular expressions for parsing section headers and options.
     # Allow ``]`` and escaped ``;`` and ``#`` characters in section headers
     SECTCRE = re.compile(
-        r'\s*\['                              # [
-        r'(?P<header>([^#;]|\\#|\\;)+)'       # very permissive!
-        r'\]'                                 # ]
+        r"""
+
+        \s *                                # Optional whitespace
+        \[                                  # Opening square brace
+
+        (?P<header>                         # One or more characters excluding
+            ( [^\#;] | \\\# | \\; ) +       # unescaped # and ; characters
         )
+
+        \]                                  # Closing square brace
+
+        """, re.VERBOSE
+    )
     # Regular expression for parsing option name/values.
     # Allow any amount of whitespaces, followed by separator
     # (either ``:`` or ``=``), followed by any amount of whitespace and then
     # any characters to eol
     OPTCRE = re.compile(
-        r'\s*(?P<option>[^:=\s][^:=]*)'
-        r'\s*(?P<vi>[:=])\s*'
-        r'(?P<value>.*)$'
+        r"""
+
+        \s *                                # Optional whitespace
+        (?P<option>                         # One or more characters excluding
+            [^:=\s]                         # : a = characters (and first
+            [^:=] *                         # must not be whitespace)
         )
+        \s *                                # Optional whitespace
+        (?P<vi>
+            [:=]                            # Single = or : character
+        )
+        \s *                                # Optional whitespace
+        (?P<value>
+            . *                             # One or more characters
+        )
+        $
+
+        """, re.VERBOSE
+    )
 
     def __init__(self, filename):
         self.filename = filename
@@ -59,7 +83,7 @@ class EditorConfigParser(object):
 
     def matches_filename(self, config_filename, glob):
         """Return True if section glob matches filename"""
-        config_dirname = normcase(dirname(config_filename)).replace(sep, '/')
+        config_dirname = normpath(dirname(config_filename)).replace(sep, '/')
         glob = glob.replace("\\#", "#")
         glob = glob.replace("\\;", ";")
         if '/' in glob:
