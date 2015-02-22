@@ -85,6 +85,7 @@ class EditorConfig(sublime_plugin.EventListener):
 		indent_size = config.get('indent_size')
 		trim_trailing_whitespace = config.get('trim_trailing_whitespace')
 		insert_final_newline = config.get('insert_final_newline')
+		max_line_length = config.get('max_line_length')
 		if indent_style == 'space':
 			settings.set('translate_tabs_to_spaces', True)
 		elif indent_style == 'tab':
@@ -102,5 +103,10 @@ class EditorConfig(sublime_plugin.EventListener):
 			settings.set('ensure_newline_at_eof_on_save', True)
 		elif insert_final_newline == 'false':
 			settings.set('ensure_newline_at_eof_on_save', False)
+		if max_line_length:
+			try:
+				settings.set('rulers', [int(max_line_length)])
+			except ValueError:
+				pass
 
 		view.settings().set(self.MARKER, True)
