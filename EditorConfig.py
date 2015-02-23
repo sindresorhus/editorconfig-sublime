@@ -105,6 +105,7 @@ class EditorConfig(sublime_plugin.EventListener):
 			settings.set('ensure_newline_at_eof_on_save', False)
 		if max_line_length:
 			try:
+				settings.set('wrap_width', int(max_line_length))
 				settings.set('rulers', [int(max_line_length)])
 			except ValueError:
 				pass
