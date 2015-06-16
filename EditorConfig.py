@@ -74,9 +74,9 @@ class EditorConfig(sublime_plugin.EventListener):
 			view.set_encoding(CHARSETS[charset])
 		if end_of_line in LINE_ENDINGS:
 			view.set_line_endings(LINE_ENDINGS[end_of_line])
-		if indent_style == 'space' and spaces == False:
+		if indent_style == 'space':
 			view.run_command('expand_tabs', {'set_translate_tabs': True})
-		elif indent_style == 'tab' and spaces == True:
+		elif indent_style == 'tab':
 			view.run_command('unexpand_tabs', {'set_translate_tabs': True})
 
 	def apply_config(self, view, config):
