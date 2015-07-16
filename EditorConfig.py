@@ -1,4 +1,5 @@
 import pprint
+import sublime
 import sublime_plugin
 
 def unexpanduser(path):
@@ -70,6 +71,7 @@ class EditorConfig(sublime_plugin.EventListener):
 		charset = config.get('charset')
 		end_of_line = config.get('end_of_line')
 		indent_style = config.get('indent_style')
+		position = view.viewport_position()
 		if charset in CHARSETS:
 			view.set_encoding(CHARSETS[charset])
 		if end_of_line in LINE_ENDINGS:
@@ -78,6 +80,7 @@ class EditorConfig(sublime_plugin.EventListener):
 			view.run_command('expand_tabs', {'set_translate_tabs': True})
 		elif indent_style == 'tab':
 			view.run_command('unexpand_tabs', {'set_translate_tabs': True})
+			view.set_viewport_position(position, False)
 
 	def apply_config(self, view, config):
 		settings = view.settings()
