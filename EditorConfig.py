@@ -80,7 +80,7 @@ class EditorConfig(sublime_plugin.EventListener):
 			view.run_command('expand_tabs', {'set_translate_tabs': True})
 		elif indent_style == 'tab':
 			view.run_command('unexpand_tabs', {'set_translate_tabs': True})
-			view.set_viewport_position(position, False)
+			view.set_viewport_position(position)
 
 	def apply_config(self, view, config):
 		settings = view.settings()
