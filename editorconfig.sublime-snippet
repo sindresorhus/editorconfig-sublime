@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+root = ${1:true}
+
+[*]
+charset = ${2:utf-8}
+end_of_line = ${3:lf}
+indent_size = ${4:4}
+indent_style = ${5:space}
+insert_final_newline = ${6:true}
+trim_trailing_whitespace = ${7:true}
+]]></content>
+	<tabTrigger>editorconfig</tabTrigger>
+</snippet>
