@@ -48,6 +48,12 @@ trim_trailing_whitespace = false
 
 ## Tips
 
+### EditorConfig snippet
+
+If you can't remember all settings managed by the EditorConfig file, you'll love the `editorconfig` snippet.
+
+Just type `editorconfig` + `tab`, and your editor will focus on the first setting's value (root = *true*). You can change the value, if you want, and jump to the next setting's value by hitting `tab` and so on.
+
 ### View active config
 
 The active config is printed in the Sublime console.
