@@ -1,14 +1,18 @@
 <snippet>
 	<content><![CDATA[
+# EditorConfig is awesome: http://EditorConfig.org
 root = ${1:true}
 
 [*]
-charset = ${2:utf-8}
-end_of_line = ${3:lf}
-indent_size = ${4:4}
-indent_style = ${5:space}
-insert_final_newline = ${6:true}
-trim_trailing_whitespace = ${7:true}
+indent_style = ${2:tab}
+#indent_size = ${3:4}
+end_of_line = ${4:lf}
+charset = ${5:utf-8}
+trim_trailing_whitespace = ${6:true}
+insert_final_newline = ${7:true}
+
+[*.md]
+trim_trailing_whitespace = ${8:false}
 ]]></content>
 	<tabTrigger>editorconfig</tabTrigger>
 </snippet>
