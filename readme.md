@@ -52,9 +52,9 @@ trim_trailing_whitespace = false
 
 If you can't remember all settings managed by the EditorConfig file, you'll love the `editorconfig` snippet.
 
-Just type `editorconfig` + `tab`, and your editor will focus on the first setting's value (root = *true*). You can change the value, if you want, and jump to the next setting's value by hitting `tab` and so on.
+Just type `editorconfig` + <kbd>tab</kbd>, and your editor will focus on the first setting's value (root = *true*). You can change the value, if you want, and jump to the next setting's value by hitting <kbd>tab</kbd> and so on.
 
-You can be in a context where `editorconfig` + `tab` trigger another snippet. In that case, simply use `Goto anywhere` (`Ctrl` + `P` on Linux/Windows or `⌘` + `P` on OSX), type `editorconfig`, select `Snippet: editorconfig` and hit `Enter`.
+You can be in a context where `editorconfig` + <kbd>tab</kbd> trigger another snippet. In that case, simply use `Goto anywhere` (<kbd>Ctrl</kbd> + <kbd>P</kbd> on Linux/Windows or <kbd>⌘</kbd> + <kbd>P</kbd> on OSX), type `editorconfig`, select `Snippet: editorconfig` and hit <kbd>Enter</kbd>.
 
 ### View active config
 
