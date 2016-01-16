@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+root = true
+
+[*]
+${1/(^$)|.*/?1:# tab | space\n/i}indent_style = ${1:tab}${1/(t$)|(s$)|(ta$)|(sp$)|.*/?1:ab:?2:pace:?3:b:?4:ace/i}
+${2/(^$)|.*/?1:# /}indent_size = ${2:}
+${3/(^$)|.*/?1:# lf | crlf\n/i}end_of_line = ${3:lf}${3/(l$)|(c$)|.*/?1:f:?2:rlf/i}
+${4/(^$)|.*/?1:# latin1 | utf-8 | utf-8-bom | utf-16be | utf-16le\n/i}charset = ${4:utf-8}${4/(l$)|(u$)|(la$)|(ut$)|.*/(?1:atin1:)(?2:tf-8:)(?3:tin1:)(?4:f-8)/i}
+${5/(^$)|.*/?1:# true | false\n/i}trim_trailing_whitespace = ${5:true}${5/(t$)|(f$)|(tr$)|(fa$)|.*/?1:rue:?2:alse:?3:ue:?4:lse/i}
+${6/(^$)|.*/?1:# true | false\n/i}insert_final_newline = ${6:true}${6/(t$)|(f$)|(tr$)|(fa$)|.*/?1:rue:?2:alse:?3:ue:?4:lse/i}
+]]></content>
+	<tabTrigger>editorconfig</tabTrigger>
+	<scope>source.ini.editorconfig,text.plain</scope>
+</snippet>
