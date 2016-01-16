@@ -11,4 +11,5 @@ ${5/(^$)|.*/?1:# true | false\n/i}trim_trailing_whitespace = ${5:true}${5/(t$)|(
 ${6/(^$)|.*/?1:# true | false\n/i}insert_final_newline = ${6:true}${6/(t$)|(f$)|(tr$)|(fa$)|.*/?1:rue:?2:alse:?3:ue:?4:lse/i}
 ]]></content>
 	<tabTrigger>editorconfig</tabTrigger>
+	<scope>source.ini.editorconfig,text.plain</scope>
 </snippet>
