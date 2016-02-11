@@ -5,7 +5,7 @@
 
 ## Install
 
-Install `EditorConfig` with [Package Control](https://sublime.wbond.net) and restart Sublime.
+Install `EditorConfig` with [Package Control](https://packagecontrol.io) and restart Sublime.
 
 
 ## Getting started
