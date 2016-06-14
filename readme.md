@@ -54,7 +54,7 @@ If you can't remember all settings managed by the EditorConfig file, you'll love
 
 Just type `editorconfig` + <kbd>tab</kbd>, and your editor will focus on the first setting's value (indent_style = *lf*). You can change the value, if you want, and jump to the next setting's value by hitting <kbd>tab</kbd> and so on. Settings are somewhat autocompleted, and if you don't remember all possible values, simply remove the setting value to see them all as a comment.
 
-You can be in a context where `editorconfig` + <kbd>tab</kbd> trigger another snippet. In that case, simply use `Goto anywhere` (<kbd>Ctrl</kbd> + <kbd>P</kbd> on Linux/Windows or <kbd>⌘</kbd> + <kbd>P</kbd> on OSX), type `editorconfig`, select `Snippet: editorconfig` and hit <kbd>Enter</kbd>.
+You can be in a context where `editorconfig` + <kbd>tab</kbd> trigger another snippet. In that case, simply use `Goto anywhere` (<kbd>Ctrl</kbd> + <kbd>P</kbd> on Linux/Windows or <kbd>⌘</kbd> + <kbd>P</kbd> on macOS), type `editorconfig`, select `Snippet: editorconfig` and hit <kbd>Enter</kbd>.
 
 ### View active config
 
