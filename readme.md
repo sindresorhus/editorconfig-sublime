@@ -71,7 +71,7 @@ This plugin does its changes transparently in the background. I would recommend 
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)
 
 
 [EditorConfig site]: http://editorconfig.org
