@@ -3,6 +3,15 @@
 > [EditorConfig](http://editorconfig.org) helps developers maintain consistent coding styles between different editors
 
 
+---
+
+<p align="center">🦄</p>
+<p align="center"><b>Support this project & level up your Sublime skills with this excellent <a href="https://SublimeTextBook.com/friend/AWESOME">Sublime Power User</a> course by Wes Bos</b><br>Try his free <a href="https://javascript30.com/friend/AWESOME">JavaScript 30</a> course for a taste of what to expect. Also check out his <a href="https://ES6.io/friend/AWESOME">ES6</a> and <a href="https://ReactForBeginners.com/friend/AWESOME">React</a> course.</p>
+<p align="center">🌈</p>
+
+---
+
+
 ## Install
 
 Install `EditorConfig` with [Package Control](https://packagecontrol.io) and restart Sublime.
