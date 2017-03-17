@@ -31,9 +31,11 @@ See the [EditorConfig site][] for documentation.
 - charset
 - trim_trailing_whitespace
 - insert_final_newline
+- max_line_length*
 
 Explanation of the properties can be found on the [EditorConfig site][].
 
+\* support for `max_line_length` requires the [AutoWrap](https://github.com/randy3k/AutoWrap) plugin to be installed.
 
 ## Example file
 
