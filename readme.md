@@ -17,9 +17,11 @@
 Install `EditorConfig` with [Package Control](https://packagecontrol.io) and restart Sublime.
 
 
-## Getting started
+## Use
 
-See the [EditorConfig site][] for documentation.
+Create an .editorconfig file in the root of your project, specifying your preferences. See the [EditorConfig site][] for documentation.
+
+To apply your .editorconfig settings to the current file, use the Sublime Text built-in command "Indentation: Reindent lines". 
 
 
 ## Supported properties
