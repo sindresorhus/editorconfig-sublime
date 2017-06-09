@@ -1,4 +1,5 @@
 import pprint
+import sublime
 import sublime_plugin
 
 def unexpanduser(path):
@@ -28,6 +29,13 @@ CHARSETS = {
 	'utf-16le': 'utf-16 le'
 }
 
+def log(msg):
+	print('EditorConfig: %s' % msg)
+
+def debug(msg):
+	if sublime.load_settings('EditorConfig.sublime-settings').get('debug', False):
+		log(msg)
+
 class EditorConfig(sublime_plugin.EventListener):
 	MARKER = 'editorconfig'
 
@@ -54,11 +62,8 @@ class EditorConfig(sublime_plugin.EventListener):
 		else:
 			if config:
 				if event == 'activated':
-					print('\nEditorConfig')
-					path = unexpanduser(path)
-					print(path)
-					pprint.pprint(config)
-					print('')
+					debug('File Path \n%s' % unexpanduser(path))
+					debug('Applied Settings \n%s' % pprint.pformat(config))
 				if event == 'pre_save':
 					self.apply_pre_save(view, config)
 				else:

@@ -1,0 +1,20 @@
+[
+	{
+		"id": "preferences",
+		"children": [
+			{
+				"id": "package-settings",
+				"children": [
+					{
+						"caption": "EditorConfig",
+						"command": "edit_settings",
+						"args": {
+							"base_file": "${packages}/EditorConfig/EditorConfig.sublime-settings",
+							"default": "{\n\t$0\n}\n"
+						}
+					}
+				]
+			}
+		]
+	}
+]
