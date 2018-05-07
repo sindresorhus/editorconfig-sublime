@@ -75,6 +75,7 @@ class EditorConfig(sublime_plugin.EventListener):
 		charset = config.get('charset')
 		end_of_line = config.get('end_of_line')
 		indent_style = config.get('indent_style')
+		insert_final_newline = config.get('insert_final_newline')
 		if charset in CHARSETS:
 			view.set_encoding(CHARSETS[charset])
 		if end_of_line in LINE_ENDINGS:
@@ -83,6 +84,8 @@ class EditorConfig(sublime_plugin.EventListener):
 			view.run_command('expand_tabs', {'set_translate_tabs': True})
 		elif indent_style == 'tab' and spaces == True:
 			view.run_command('unexpand_tabs', {'set_translate_tabs': True})
+		if insert_final_newline == 'false':
+			view.run_command('remove_final_newlines')
 
 	def apply_config(self, view, config):
 		settings = view.settings()
@@ -109,3 +112,8 @@ class EditorConfig(sublime_plugin.EventListener):
 			settings.set('ensure_newline_at_eof_on_save', False)
 
 		view.settings().set(self.MARKER, True)
+
+class RemoveFinalNewlinesCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		region = self.view.find('\n*\Z', 0)
+		self.view.erase(edit, region)
