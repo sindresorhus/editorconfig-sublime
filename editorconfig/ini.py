@@ -2,7 +2,7 @@
 
 Based on code from ConfigParser.py file distributed with Python 2.6.
 
-Licensed under PSF License (see LICENSE.txt file).
+Licensed under PSF License (see LICENSE.PSF file).
 
 Changes to original ConfigParser:
 
@@ -13,16 +13,16 @@ Changes to original ConfigParser:
 
 """
 
+import posixpath
 import re
 from codecs import open
-import posixpath
+from collections import OrderedDict
 from os import sep
-from os.path import normpath, dirname
+from os.path import dirname, normpath
 
+from editorconfig.compat import u
 from editorconfig.exceptions import ParsingError
 from editorconfig.fnmatch import fnmatch
-from editorconfig.odict import OrderedDict
-from editorconfig.compat import u
 
 
 __all__ = ["ParsingError", "EditorConfigParser"]

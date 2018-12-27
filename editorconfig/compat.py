@@ -1,6 +1,7 @@
 """EditorConfig Python2/Python3 compatibility utilities"""
 import sys
 
+
 __all__ = ['force_unicode', 'u']
 
 

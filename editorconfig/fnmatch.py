@@ -11,7 +11,7 @@ corresponding to PATTERN.  (It does not compile it.)
 
 Based on code from fnmatch.py file distributed with Python 2.6.
 
-Licensed under PSF License (see LICENSE.txt file).
+Licensed under PSF License (see LICENSE.PSF file).
 
 Changes to original fnmatch module:
 - translate function supports ``*`` and ``**`` similarly to fnmatch C library
@@ -19,6 +19,7 @@ Changes to original fnmatch module:
 
 import os
 import re
+
 
 __all__ = ["fnmatch", "fnmatchcase", "translate"]
 
@@ -177,7 +178,7 @@ def translate(pat, nested=False):
                 num_range = NUMERIC_RANGE.match(pat[index:pos])
                 if num_range:
                     numeric_groups.append(map(int, num_range.groups()))
-                    result += "([+-]?\d+)"
+                    result += r"([+-]?\d+)"
                 else:
                     inner_result, inner_groups = translate(pat[index:pos],
                                                            nested=True)
@@ -215,5 +216,5 @@ def translate(pat, nested=False):
         else:
             is_escaped = False
     if not nested:
-        result += '\Z(?ms)'
+        result = r'(?s)%s\Z' % result
     return result, numeric_groups
