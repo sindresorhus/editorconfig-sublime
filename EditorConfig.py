@@ -91,17 +91,25 @@ class EditorConfig(sublime_plugin.EventListener):
 		settings = view.settings()
 		indent_style = config.get('indent_style')
 		indent_size = config.get('indent_size')
+		if indent_size:
+			try:
+				indent_size = int(indent_size)
+			except ValueError:
+				indent_size = None
+		tab_width = config.get('tab_width', indent_size)
+		if tab_width:
+			try:
+				tab_width = int(tab_width)
+			except ValueError:
+				tab_width = None
 		trim_trailing_whitespace = config.get('trim_trailing_whitespace')
 		insert_final_newline = config.get('insert_final_newline')
 		if indent_style == 'space':
 			settings.set('translate_tabs_to_spaces', True)
 		elif indent_style == 'tab':
 			settings.set('translate_tabs_to_spaces', False)
-		if indent_size:
-			try:
-				settings.set('tab_size', int(indent_size))
-			except ValueError:
-				pass
+		if tab_width:
+			settings.set('tab_size', tab_width)
 		if trim_trailing_whitespace == 'true':
 			settings.set('trim_trailing_white_space_on_save', True)
 		elif trim_trailing_whitespace == 'false':
