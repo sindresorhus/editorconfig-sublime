@@ -39,6 +39,10 @@ def debug(msg):
 class EditorConfig(sublime_plugin.EventListener):
 	MARKER = 'editorconfig'
 
+	def on_load(self, view):
+		if not view.settings().has(self.MARKER):
+			self.init(view, 'load')
+
 	def on_activated(self, view):
 		if not view.settings().has(self.MARKER):
 			self.init(view, 'activated')
@@ -61,7 +65,7 @@ class EditorConfig(sublime_plugin.EventListener):
 			print('Error occurred while getting EditorConfig properties')
 		else:
 			if config:
-				if event == 'activated':
+				if event == 'activated' or event == 'load':
 					debug('File Path \n%s' % unexpanduser(path))
 					debug('Applied Settings \n%s' % pprint.pformat(config))
 				if event == 'pre_save':
