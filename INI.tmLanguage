@@ -2,17 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>fileTypes</key>
-	<array>
-		<string>ini</string>
-		<string>INI</string>
-		<string>inf</string>
-		<string>INF</string>
-		<string>reg</string>
-		<string>REG</string>
-	</array>
 	<key>name</key>
-	<string>INI</string>
+	<string>-</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -49,7 +40,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*(\[)(.*?)(\])\s*</string>
+			<string>^\s*(\[)(.*?)(\])</string>
 			<key>name</key>
 			<string>meta.tag.section.ini</string>
 		</dict>
@@ -116,6 +107,6 @@
 	<key>scopeName</key>
 	<string>source.ini</string>
 	<key>uuid</key>
-	<string>957acd74-6d7c-4732-a25b-5f66a1e637cd</string>
+	<string>aca72d19-945d-4f74-9e88-b7d80be2fb1b</string>
 </dict>
 </plist>

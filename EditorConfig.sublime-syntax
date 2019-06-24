@@ -1,0 +1,9 @@
+%YAML1.2
+---
+name: EditorConfig
+file_extensions:
+  - .editorconfig
+scope: source.ini.editorconfig
+contexts:
+  main:
+    - include: scope:source.ini
