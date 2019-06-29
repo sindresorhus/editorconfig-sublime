@@ -25,6 +25,8 @@ See the [EditorConfig site][] for documentation.
 
 Explanation of the properties can be found on the [EditorConfig site][].
 
+<sub>The `tab_width` property is intentionally not supported.</sub>
+
 
 ## Example file
 
