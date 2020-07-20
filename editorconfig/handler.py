@@ -30,14 +30,14 @@ def get_filenames(path, filename):
 
 def find_up(path, folder):
     """Return true if the path contains the folder, false otherwise"""
-    while True:
-        new_path, basename = os.path.split(path)
+    new_path, basename = os.path.split(path)
+    # Stop the while when the root is reached
+    while path != new_path:
         if basename == folder:
             return True
-        # Stop when root reached :
-        if new_path == path:
-            return False
         path = new_path
+        new_path, basename = os.path.split(path)
+    return False
 
 class EditorConfigHandler(object):
 
@@ -137,5 +137,5 @@ class EditorConfigHandler(object):
             opts["indent_size"] = opts["tab_width"]
 
         # Set end_of_line to lf if in a .git folder
-        if find_up(self.filepath, ".git")
+        if find_up(self.filepath, ".git"):
             opts["end_of_line"] = "lf"
