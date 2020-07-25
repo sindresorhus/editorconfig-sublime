@@ -146,6 +146,6 @@ class EditorConfigHandler(object):
                 opts["indent_size"] == "tab"):
             opts["indent_size"] = opts["tab_width"]
 
-        # Set end_of_line to lf if in a .git folder
+        # Set end_of_line to lf if in a “.git” directory
         if find_up(".git", self.filepath):
             opts["end_of_line"] = "lf"
