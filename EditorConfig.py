@@ -74,6 +74,7 @@ class EditorConfig(sublime_plugin.EventListener):
 					self.apply_config(view, config)
 
 	def apply_pre_save(self, view, config):
+		view.run_command('detect_indentation')
 		settings = view.settings()
 		spaces = settings.get('translate_tabs_to_spaces')
 		charset = config.get('charset')
