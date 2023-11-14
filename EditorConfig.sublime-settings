@@ -1,4 +1,5 @@
 {
+	"extensions": [".editorconfig"],
 	// Show debug logging
 	"debug": false
 }
