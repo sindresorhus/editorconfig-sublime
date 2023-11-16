@@ -1,9 +1,154 @@
 %YAML 1.2
 ---
+# https://www.sublimetext.com/docs/syntax.html
+# https://editorconfig-specification.readthedocs.io/#file-format
 name: EditorConfig
+scope: source.ini.editorconfig
+
 file_extensions:
   - .editorconfig
-scope: source.ini.editorconfig
+
 contexts:
   main:
-    - include: scope:source.ini
+    - include: comment
+    - include: section
+    - include: mapping
+
+  comment:
+    - match: ;
+      scope: punctuation.definition.comment.ini
+      push:
+        - meta_scope: comment.line.semicolon.ini
+        - match: \n
+          pop: true
+    - match: \#
+      scope: punctuation.definition.comment.ini
+      push:
+        - meta_scope: comment.line.number-sign.ini
+        - match: \n
+          pop: true
+
+  section:
+    - match: \[
+      scope: meta.section.ini punctuation.definition.section.begin.ini
+      push:
+        - meta_content_scope: meta.section.ini entity.name.section.ini
+        - match: \]
+          scope: meta.section.ini punctuation.definition.section.end.ini
+          pop: true
+        - match: \\\S
+          scope: constant.character.escape.ini
+        - match: /
+          scope: punctuation.separator.slash.ini
+        - include: glob-expression
+        - include: eol-pop
+
+  # https://editorconfig-specification.readthedocs.io/#glob-expressions
+  glob-expression:
+    - match: '[*?]'
+      scope: constant.character.wildcard.ini
+    - match: (\[)(!)?\w+(\])
+      scope: meta.set.ini
+      captures:
+        1: punctuation.section.brackets.begin.ini
+        2: keyword.operator.logical.ini
+        3: punctuation.section.brackets.end.ini
+    - match: \{
+      scope: punctuation.section.braces.begin.ini
+      push:
+        - meta_scope: meta.set.ini
+        - match: \}
+          scope: punctuation.section.braces.end.ini
+          pop: true
+        - match: \,
+          scope: punctuation.separator.sequence.ini
+        - match: \.\.
+          scope: punctuation.separator.range.ini
+        - include: eol-pop
+
+  # https://editorconfig-specification.readthedocs.io/#supported-pairs
+  mapping:
+    - match: (?=\S)
+      push:
+        - meta_content_scope: meta.mapping.key.ini
+        - match: (?=\s*=)
+          set:
+            - - meta_content_scope: meta.mapping.ini
+              - match: (?=\S)
+                set:
+                  - mapping-value-meta
+                  - mapping-value
+              - include: eol-pop
+            - - match: =
+                scope: punctuation.separator.key-value.ini
+                pop: true
+        - match: \b(?:indent_style|indent_size|tab_width|end_of_line|charset|trim_trailing_whitespace|insert_final_newline|root)\b
+          scope: variable.language.ini
+        - include: string
+        - include: eol-pop
+
+  mapping-value:
+    - match: \b(?i:tab|space|lf|cr(?:lf)?|latin1|utf-8(?:-bom)?|utf-16[bl]e)\b
+      scope: support.constant.ini
+    - match: \b(?i:true)\b
+      scope: constant.language.boolean.true.ini
+    - match: \b(?i:false)\b
+      scope: constant.language.boolean.false.ini
+    - include: number
+    - include: string
+    - include: eol-pop
+
+  mapping-value-meta:
+    - meta_scope: meta.mapping.value.ini
+    - match: ''
+      pop: true
+
+  number:
+    - match: '([-+])?\b(\d*(\.)\d+(?:(?:E|e)[-+]?\d+)?)(F|f)?\b'
+      scope: meta.number.float.decimal.ini
+      captures:
+        1: keyword.operator.arithmetic.ini
+        2: constant.numeric.value.ini
+        3: punctuation.separator.decimal.ini
+        4: constant.numeric.suffix.ini
+    - match: '([-+])?\b(\d+)\b'
+      scope: meta.number.integer.decimal.ini
+      captures:
+        1: keyword.operator.arithmetic.ini
+        2: constant.numeric.value.ini
+
+  string:
+    - match: \"
+      scope: punctuation.definition.string.begin.ini
+      push:
+        - meta_scope: string.quoted.double.ini
+        - include: character-escape
+        - match: \"
+          scope: punctuation.definition.string.end.ini
+          pop: true
+        - match: \n
+          pop: true
+    - match: \'
+      scope: punctuation.definition.string.begin.ini
+      push:
+        - meta_scope: string.quoted.single.ini
+        - include: character-escape
+        - match: \'
+          scope: punctuation.definition.string.end.ini
+          pop: true
+        - match: \n
+          pop: true
+    - match: (?=\S)
+      push:
+        - meta_content_scope: string.unquoted.ini
+        - include: character-escape
+        - match: (?=[\s=:,\[])
+          pop: true
+
+  character-escape:
+    - match: \\(?:[^*\s\w]|[abnrt0]|x\h{4})
+      scope: constant.character.escape.ini
+
+  eol-pop:
+    - match: $|(?=\s+[;#])
+      pop: true
