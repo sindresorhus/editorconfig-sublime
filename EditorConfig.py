@@ -1,19 +1,7 @@
 import pprint
 import sublime
 import sublime_plugin
-
-def unexpanduser(path):
-	from os.path import expanduser
-	return path.replace(expanduser('~'), '~')
-
-try:
-	import os, sys
-	# stupid python module system
-	sys.path.append(os.path.dirname(os.path.realpath(__file__)))
-	from .editorconfig import get_properties, EditorConfigError
-except:
-	# Python 2
-	from editorconfig import get_properties, EditorConfigError
+from .editorconfig import get_properties, EditorConfigError
 
 LINE_ENDINGS = {
 	'lf': 'unix',
@@ -28,6 +16,10 @@ CHARSETS = {
 	'utf-16be': 'utf-16 be',
 	'utf-16le': 'utf-16 le'
 }
+
+def unexpanduser(path):
+	from os.path import expanduser
+	return path.replace(expanduser('~'), '~')
 
 def log(msg):
 	print('EditorConfig: %s' % msg)
@@ -119,5 +111,5 @@ class EditorConfig(sublime_plugin.EventListener):
 
 class RemoveFinalNewlinesCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		region = self.view.find('\n*\Z', 0)
+		region = self.view.find(r'\n*\Z', 0)
 		self.view.erase(edit, region)
