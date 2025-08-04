@@ -1,6 +1,6 @@
 """EditorConfig Python Core"""
 
-from editorconfig.versiontools import join_version
+from .versiontools import join_version
 
 VERSION = (0, 12, 2, "final")
 
@@ -15,5 +15,5 @@ def get_properties(filename):
     return handler.get_configurations()
 
 
-from editorconfig.handler import EditorConfigHandler
-from editorconfig.exceptions import *
+from .handler import EditorConfigHandler
+from .exceptions import *
