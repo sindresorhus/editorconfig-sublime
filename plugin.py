@@ -72,6 +72,10 @@ class EditorConfig(sublime_plugin.EventListener):
 		end_of_line = config.get('end_of_line')
 		indent_style = config.get('indent_style')
 		insert_final_newline = config.get('insert_final_newline')
+
+		viewport = view.viewport_position()
+		selections = list(view.sel())
+
 		if charset in CHARSETS:
 			view.set_encoding(CHARSETS[charset])
 		if end_of_line in LINE_ENDINGS:
@@ -82,6 +86,13 @@ class EditorConfig(sublime_plugin.EventListener):
 			view.run_command('unexpand_tabs', {'set_translate_tabs': True})
 		if insert_final_newline == 'false':
 			view.run_command('remove_final_newlines')
+
+		# Restore viewport and selection to avoid jumping on save.
+		sel = view.sel()
+		sel.clear()
+		for region in selections:
+			sel.add(region)
+		view.set_viewport_position(viewport, False)
 
 	def apply_config(self, view, config):
 		settings = view.settings()
