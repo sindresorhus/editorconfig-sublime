@@ -112,4 +112,11 @@ class EditorConfig(sublime_plugin.EventListener):
 class RemoveFinalNewlinesCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		region = self.view.find(r'\n*\Z', 0)
-		self.view.erase(edit, region)
+		if not region.empty():
+			# Save viewport and selection to prevent jump on save
+			current_viewport = self.view.viewport_position()
+			
+			self.view.erase(edit, region)
+			
+			# Restore viewport
+			self.view.set_viewport_position(current_viewport, False)
