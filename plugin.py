@@ -1,7 +1,13 @@
+# -*- coding: UTF-8 -*-
 import pprint
 import sublime
 import sublime_plugin
-from .editorconfig import get_properties, EditorConfigError
+
+try:
+	from .editorconfig import get_properties, EditorConfigError
+except ValueError:
+	from editorconfig import get_properties, EditorConfigError
+
 
 LINE_ENDINGS = {
 	'lf': 'unix',
@@ -115,8 +121,8 @@ class RemoveFinalNewlinesCommand(sublime_plugin.TextCommand):
 		if not region.empty():
 			# Save viewport and selection to prevent jump on save
 			current_viewport = self.view.viewport_position()
-			
+
 			self.view.erase(edit, region)
-			
+
 			# Restore viewport
 			self.view.set_viewport_position(current_viewport, False)

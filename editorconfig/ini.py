@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 """EditorConfig file parser
 
 Based on code from ConfigParser.py file distributed with Python 2.6.
@@ -16,11 +17,10 @@ Changes to original ConfigParser:
 import posixpath
 import re
 from codecs import open
-from collections import OrderedDict
 from os import sep
 from os.path import dirname, normpath
 
-from .compat import u
+from .compat import OrderedDict, u
 from .exceptions import ParsingError
 from .fnmatch import fnmatch
 
