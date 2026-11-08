@@ -91,11 +91,14 @@ class EditorConfig(sublime_plugin.EventListener):
 		insert_final_newline = config.get('insert_final_newline')
 		if indent_style == 'space':
 			settings.set('translate_tabs_to_spaces', True)
+			settings.set('detect_indentation', False)
 		elif indent_style == 'tab':
 			settings.set('translate_tabs_to_spaces', False)
+			settings.set('detect_indentation', False)
 		if indent_size:
 			try:
 				settings.set('tab_size', int(indent_size))
+				settings.set('detect_indentation', False)
 			except ValueError:
 				pass
 		if trim_trailing_whitespace == 'true':
